@@ -86,17 +86,17 @@ $(function() {
     addMessageElement($messageDiv, options);
   }
 
-  // function addChatTyping (data) {
-  //   data.typing = true;
-  //   data.message = 'is typing';
-  //   addChatMessage(data);
-  // }
-  //
-  // function removeChatTyping (data) {
-  //   getTypingMessages(data).fadeOut(function () {
-  //     $(this).remove();
-  //   });
-  // }
+  function addChatTyping (data) {
+    data.typing = true;
+    data.message = 'is typing';
+    addChatMessage(data);
+  }
+
+  function removeChatTyping (data) {
+    getTypingMessages(data).fadeOut(function () {
+      $(this).remove();
+    });
+  }
 
   function addMessageElement (el, options) {
     var $el = $(el);
@@ -145,12 +145,12 @@ $(function() {
     }
   }
 
-  // Gets the 'X is typing' messages of a user
-  // function getTypingMessages (data) {
-  //   return $('.typing.message').filter(function (i) {
-  //     return $(this).data('username') === data.username;
-  //   });
-  // }
+  Gets the 'X is typing' messages of a user
+  function getTypingMessages (data) {
+    return $('.typing.message').filter(function (i) {
+      return $(this).data('username') === data.username;
+    });
+  }
 
   function getUsernameColor (username) {
     var hash = 7;
@@ -160,8 +160,6 @@ $(function() {
     var index = Math.abs(hash % COLORS.length);
     return COLORS[index];
   }
-
-  // Keyboard events
 
   $window.keydown(function (event) {
     if (!(event.ctrlKey || event.metaKey || event.altKey)) {
@@ -216,11 +214,11 @@ $(function() {
     removeChatTyping(data);
   });
 
-  // socket.on('typing', function (data) {
-  //   addChatTyping(data);
-  // });
+  socket.on('typing', function (data) {
+    addChatTyping(data);
+  });
 
-  // socket.on('stop typing', function (data) {
-  //   removeChatTyping(data);
-  // });
+  socket.on('stop typing', function (data) {
+    removeChatTyping(data);
+  });
 });
