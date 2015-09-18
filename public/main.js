@@ -6,8 +6,6 @@ $(function() {
     '#58dc00', '#287b00', '#a8f07a', '#4ae8c4',
     '#3b88eb', '#3824aa', '#a700ff', '#d300e7'
   ];
-
-  // Initialize varibles
   var $window = $(window);
   var $usernameInput = $('.usernameInput');
   var $messages = $('.messages');
@@ -145,7 +143,6 @@ $(function() {
     }
   }
 
-  Gets the 'X is typing' messages of a user
   function getTypingMessages (data) {
     return $('.typing.message').filter(function (i) {
       return $(this).data('username') === data.username;

@@ -7,13 +7,12 @@ var io = require('socket.io')(server);
 var port = process.env.OPENSHIFT_NODEJS_PORT || 8080;
 var ip_address = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1'
 
-server.listen(port, ip_address, function () {
-  console.log('Server listening at port %d', port);
+server.listen(port,ip_address,function () {
+  console.log('Server listening at  %s:%d', ip_address,port);
 });
 
-// Routing
-app.use(express.static(__dirname + '/public'));
 
+app.use(express.static(__dirname + '/public'));
 
 var usernames = {};
 var numUsers = 0;
@@ -41,13 +40,11 @@ io.on('connection', function (socket) {
       numUsers: numUsers
     });
   });
-
   socket.on('typing', function () {
     socket.broadcast.emit('typing', {
       username: socket.username
     });
   });
-
   socket.on('stop typing', function () {
     socket.broadcast.emit('stop typing', {
       username: socket.username
