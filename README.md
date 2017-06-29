@@ -4,5 +4,5 @@ test chat using socket.io
 
 Usage:
 
-** npm install
-** node index.js
+ *npm install
+ *node index.js
